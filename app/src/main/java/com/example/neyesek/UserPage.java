@@ -1,4 +1,4 @@
-package com.example.constraintlayout;
+package com.example.neyesek;
 
 
 import android.support.v7.app.AppCompatActivity;
