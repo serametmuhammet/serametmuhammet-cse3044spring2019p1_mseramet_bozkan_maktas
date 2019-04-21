@@ -1,4 +1,4 @@
-package com.example.constraintlayout;
+package com.example.mapscreen;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package com.example.constraintlayout;
+package com.example.mapscreen;
 
 import org.junit.Test;
 
