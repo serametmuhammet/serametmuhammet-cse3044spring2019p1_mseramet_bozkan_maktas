@@ -13,4 +13,15 @@
     <string name="register">Register !</string>
     <string name="return_login">Already have an account? Login here!</string>
 
+
+    <string name="restoran">Restoran:</string>
+    <string name="miss_simit">Burger King</string>
+    <string name="mesafe">Mesafe:</string>
+    <string name="indirim">İndirim:</string>
+    <string name="_10">%10</string>
+    <string name="kalan_sure">Kalan Süre:</string>
+    <string name="_1_1">🏃‍: 1 km\n🚗: 1 km</string>
+    <string name="button">Button</string>
+    <string name="rastgele">Rastgele</string>
+    <string name="Favori">Favori</string>
 </resources>
