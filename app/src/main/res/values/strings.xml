@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">NeYesek</string>
+    <string name="google_maps_key">AIzaSyAxsRH1zTvJQ5hVJHCwm35_Ohq4P4eDkwA</string>
 
     <!--texts embedded in login screen-->
     <string name="email">Email</string>
@@ -19,9 +20,10 @@
     <string name="mesafe">Mesafe:</string>
     <string name="indirim">İndirim:</string>
     <string name="_10">%10</string>
-    <string name="kalan_sure">Kalan Süre:</string>
+    <string name="kalan_sure">İndirim Saati:</string>
     <string name="_1_1">🏃‍: 1 km\n🚗: 1 km</string>
     <string name="button">Button</string>
     <string name="rastgele">Rastgele</string>
     <string name="Favori">Favori</string>
+    <string name="error">Error</string>
 </resources>

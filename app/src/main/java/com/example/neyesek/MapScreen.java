@@ -1,49 +1,62 @@
 package com.example.neyesek;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Application;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.gson.ExclusionStrategy;
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+import com.example.neyesek.network.NearByApi;
 
+import java.util.Collection;
+import java.util.concurrent.TimeUnit;
 
-import static com.google.android.gms.maps.model.BitmapDescriptorFactory.HUE_BLUE;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MapScreen extends AppCompatActivity implements OnMapReadyCallback {
+/**
+ * Created by Parth Dave on 31/3/17.
+ * Spaceo Technologies Pvt Ltd.
+ * parthd.spaceo@gmail.com
+ */
+
+public class MapScreen extends Application {
+
+    NearByApi nearByApi = null;
+    static MapScreen app;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
-        getSupportActionBar().hide();
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+    public void onCreate() {
+        super.onCreate();
+        app = this;
     }
 
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        LatLng coordinate = new LatLng(40.9821665,29.0670206);
-        CameraUpdate center = CameraUpdateFactory.newLatLngZoom(coordinate, 13.0f);
-        googleMap.animateCamera(center);
-        googleMap.getUiSettings().setMyLocationButtonEnabled(true);
 
-        googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(40.9821665,29.0670206))
-                .title("Burger King")
-                .snippet("Burger King"));
+    public NearByApi getApiService() {
+        if (nearByApi == null) {
+            HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+            OkHttpClient client = new OkHttpClient.Builder().retryOnConnectionFailure(true).readTimeout(80, TimeUnit.SECONDS).connectTimeout(80, TimeUnit.SECONDS).addInterceptor(interceptor).build();
 
-        googleMap.addMarker(new MarkerOptions()
-                .position(new LatLng(40.9901674,29.0597809))
-                .icon(BitmapDescriptorFactory.defaultMarker(HUE_BLUE))
-                .title("Buradasın")
-                .snippet("Konumum"));
+            Retrofit retrofit = new Retrofit.Builder().baseUrl(Constant.PLACE_API_BASE_URL).addConverterFactory(getApiConvertorFactory()).client(client).build();
+
+            nearByApi = retrofit.create(NearByApi.class);
+            return nearByApi;
+        } else {
+            return nearByApi;
+        }
     }
+
+    private static GsonConverterFactory getApiConvertorFactory() {
+        return GsonConverterFactory.create();
+    }
+
+
+    public static MapScreen getApp() {
+        return app;
+    }
+
 }
-
-
