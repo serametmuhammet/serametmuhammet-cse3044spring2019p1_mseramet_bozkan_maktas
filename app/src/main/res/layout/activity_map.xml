@@ -90,7 +90,6 @@
                         android:layout_width="201dp"
                         android:layout_height="match_parent"
                         android:lineSpacingExtra="8sp"
-                        android:text="@string/_10"
                         android:textColor="#FFFFFF"
                         android:textSize="20sp"
                         android:typeface="sans"
@@ -122,6 +121,32 @@
                         android:typeface="sans"
                         app:fontFamily="monospace" />
                 </TableRow>
+                <TableRow>
+                    <Button
+                        android:id="@+id/addPrevButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="96dp"
+                        android:layout_weight="0"
+                        android:enabled="true"
+                        android:text="Gittim"
+                        android:visibility="visible"
+                        tools:visibility="visible"
+                        />
+                    <Button
+                        android:id="@+id/addFavButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="96dp"
+                        android:layout_weight="0"
+                        android:enabled="true"
+                        android:text="Favorilere Ekle"
+                        android:visibility="visible"
+                        tools:visibility="visible"
+                        />
+
+
+
+
+                </TableRow>
             </TableLayout>
 
 
@@ -137,7 +162,6 @@
             android:text="Nearby Restaurants"
             android:visibility="visible"
             tools:visibility="visible" />
-
 
 
     </LinearLayout>

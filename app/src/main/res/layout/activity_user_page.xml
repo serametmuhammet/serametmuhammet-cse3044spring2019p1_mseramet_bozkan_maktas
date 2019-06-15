@@ -6,17 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".UserPage">
 
-    <ImageView
-        android:id="@+id/imageView"
+    <TextView
+        android:id="@+id/level"
         android:layout_width="109dp"
         android:layout_height="92dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textColor="@color/quantum_googred900"
         app:layout_constraintEnd_toStartOf="@+id/user_info"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_centerInParent="true"
+        android:textSize="70dp"
         android:scaleType="fitXY"
         tools:src="@drawable/avatara"/>
 
@@ -28,9 +32,23 @@
         android:layout_height="42dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
+        android:textColor="@color/quantum_black_100"
         android:ems="10"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        tools:text="Username Surname" />
+
+    <TextView
+        android:id="@+id/fullname"
+        android:layout_width="220dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:singleLine="false"
+        android:textColor="@color/quantum_black_100"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_info"
         tools:text="Username Surname" />
 
     <TextView
@@ -38,22 +56,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:text="Favourite Restaurants"
+        android:textColor="@color/quantum_googblue900"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_info"
+        app:layout_constraintTop_toBottomOf="@+id/fullname"
         tools:text="Favourite Restaurants" />
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="219dp"
+        android:layout_width="247dp"
         android:layout_height="162dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
+        android:outlineAmbientShadowColor="@color/quantum_bluegrey100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/fav_restName"
@@ -65,6 +86,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:singleLine="false"
+            android:textColor="@color/quantum_black_100"
             app:layout_constraintTop_toBottomOf="@+id/fav_restName"
             tools:layout_editor_absoluteX="64dp" />
     </ScrollView>
@@ -76,6 +98,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
+        android:textColor="@color/quantum_googblue900"
         android:ems="10"
         android:text="Previous Restaurants"
         app:layout_constraintEnd_toEndOf="parent"
@@ -90,6 +113,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:outlineAmbientShadowColor="@color/quantum_bluegrey100"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:textColor="@color/quantum_black_100"
             android:singleLine="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

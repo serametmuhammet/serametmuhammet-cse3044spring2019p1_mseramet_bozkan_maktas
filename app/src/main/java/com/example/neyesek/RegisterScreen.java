@@ -15,10 +15,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class RegisterScreen extends AppCompatActivity {
 
     private FirebaseAuth auth;
+    EditText fullname;
     Button register;
     EditText email;
     EditText password;
@@ -29,6 +32,7 @@ public class RegisterScreen extends AppCompatActivity {
         setContentView(R.layout.activity_register_screen);
 
         register = (Button) findViewById(R.id.registerButton);
+        fullname = (EditText) findViewById(R.id.et_reg_fullname);
         email = (EditText) findViewById(R.id.et_reg_email);
         password = (EditText) findViewById(R.id.et_reg_password);
 
@@ -67,6 +71,11 @@ public class RegisterScreen extends AppCompatActivity {
 
                                 //İşlem başarılı olduğu takdir de giriş yapılıp MainActivity e yönlendiriyoruz.
                                 else {
+
+                                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                            .setDisplayName("" + fullname.getText().toString())
+                                            .build();
+
                                     startActivity(new Intent(RegisterScreen.this, LoginScreen.class));
                                     finish();
                                 }

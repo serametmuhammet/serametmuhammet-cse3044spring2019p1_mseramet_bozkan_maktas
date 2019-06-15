@@ -7,6 +7,7 @@ import java.util.Calendar;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,12 +15,15 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.neyesek.ButtonsScreen;
+import com.example.neyesek.Restaurant;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -37,6 +41,14 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.neyesek.MapScreen;
 import com.example.neyesek.R;
 import com.example.neyesek.model.NearByApiResponse;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
 
 
 import retrofit2.Call;
@@ -50,7 +62,19 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
     private GoogleMap googleMap;
     private GoogleApiClient mGoogleApiClient;
     private Button btnFind;
-    private TextView placeName1,timePlace;
+    private TextView placeName1,timePlace, discount;
+    private Button gittim;
+    private Button favorite;
+
+    private StorageReference storage;
+    private FirebaseDatabase database;
+    private DatabaseReference gittimRef;
+    private DatabaseReference favRef, levelRef;
+    private FirebaseAuth mAuth;
+    private Uri uri = null;
+    private DatabaseReference mDatabaseUsers;
+    private FirebaseUser mCurrentUser;
+
     private LocationRequest mLocationRequest;
     public Location location;
     private int PROXIMITY_RADIUS = 300;
@@ -65,10 +89,24 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
         setContentView(R.layout.activity_map);
         getSupportActionBar().hide();
 
+        int[] discounts = {10,20,30,40};
 
         btnFind = (Button) findViewById(R.id.btnFind);
         placeName1 = (TextView) findViewById(R.id.textView3);
         timePlace = (TextView) findViewById(R.id.textView9);
+        discount = (TextView) findViewById(R.id.textView7);
+        gittim = (Button) findViewById(R.id.addPrevButton);
+        favorite = (Button) findViewById(R.id.addFavButton);
+
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
+        mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
+        gittimRef = database.getInstance().getReference().child("NeYesek").child(mCurrentUser.getUid()).child("Previous Rest");
+        favRef = database.getInstance().getReference().child("NeYesek").child(mCurrentUser.getUid()).child("Favorite Rest");
+        levelRef = database.getInstance().getReference().child("NeYesek").child(mCurrentUser.getUid()).child("Level");
+
+
+
         if(!isGooglePlayServicesAvailable()){
             Toast.makeText(this,"Google Play Services not available.",Toast.LENGTH_LONG).show();
             finish();
@@ -77,6 +115,58 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
             mapFragment.getMapAsync(this);
 
         }
+
+        System.out.println(placeName1.getText().toString());
+
+
+        gittim.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(SearchNearByPlaces.this, "POSTING...", Toast.LENGTH_LONG).show();
+
+                    final DatabaseReference newPost = gittimRef;
+                    //final DatabaseReference newPost = databaseRef.push();
+                    //adding post contents to database reference
+
+                    newPost.push().setValue(placeName1.getText().toString());
+
+
+                    levelRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                            String value =  dataSnapshot.getValue().toString();
+                            int valueInt = Integer.parseInt(value);
+                            valueInt++;
+                            value = "" + valueInt;
+                            dataSnapshot.getRef().setValue(value);
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+            }
+        });
+
+
+        favorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final DatabaseReference newPost = favRef;
+                newPost.push().setValue(placeName1.getText().toString());
+
+            }
+        });
+
+        discount.setText("" + randomDiscount(discounts));
+
     }
 
     private boolean isGooglePlayServicesAvailable() {
@@ -116,12 +206,18 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
     }
 
     public void onFindClick(View view){
-        findPlaces("restoran");
+        findPlaces("restaurant");
         View b = findViewById(R.id.table);
         b.setVisibility(View.VISIBLE);
         View c = findViewById(R.id.btnFind);
         c.setEnabled(false);
         c.setVisibility(View.INVISIBLE);
+    }
+
+    protected int randomDiscount(int array[]){
+        int rnd = new Random().nextInt(array.length);
+        return array[rnd];
+
     }
 
 

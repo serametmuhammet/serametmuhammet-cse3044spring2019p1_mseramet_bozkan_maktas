@@ -1,4 +1,3 @@
-
 package com.example.neyesek;
 
 import android.app.Application;

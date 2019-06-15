@@ -40,7 +40,7 @@ public class ButtonsScreen extends AppCompatActivity {
     private DatabaseReference databaseRef;
     private FirebaseAuth mAuth;
     private Uri uri = null;
-    private DatabaseReference mDatabaseUsers;
+    private DatabaseReference mDatabaseUsers,levelRef;
     private FirebaseUser mCurrentUser;
 
 
@@ -67,8 +67,26 @@ public class ButtonsScreen extends AppCompatActivity {
         mCurrentUser = mAuth.getCurrentUser();
         mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
         databaseRef = database.getInstance().getReference().child("NeYesek").child(mCurrentUser.getUid()).child("Previous Rest");
+        levelRef = database.getInstance().getReference().child("NeYesek").child(mCurrentUser.getUid()).child("Level");
 
         int count =0;
+
+        levelRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                if(dataSnapshot.getValue() == null){
+                    dataSnapshot.getRef().setValue("0");
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         nearbyPlaces.setOnClickListener(new View.OnClickListener() {
             @Override
