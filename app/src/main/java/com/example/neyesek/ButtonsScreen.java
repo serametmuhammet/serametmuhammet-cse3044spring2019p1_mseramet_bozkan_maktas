@@ -61,7 +61,6 @@ public class ButtonsScreen extends AppCompatActivity {
         });
 
 
-        postBtn = (Button)findViewById(R.id.btnPost);
         storage = FirebaseStorage.getInstance().getReference();
 
         mAuth = FirebaseAuth.getInstance();
