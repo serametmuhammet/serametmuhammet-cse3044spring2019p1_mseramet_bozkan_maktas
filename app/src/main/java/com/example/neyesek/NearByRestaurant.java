@@ -47,7 +47,6 @@ public class NearByRestaurant extends AppCompatActivity {
         setContentView(R.layout.activity_buttons);
 
 
-        postBtn = (Button)findViewById(R.id.btnPost);
         storage = FirebaseStorage.getInstance().getReference();
         databaseRef = database.getInstance().getReference().child("NeYesek");
         mAuth = FirebaseAuth.getInstance();
