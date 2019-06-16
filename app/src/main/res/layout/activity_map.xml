@@ -23,19 +23,19 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="301dp" />
+            android:layout_height="250dp" />
 
         <LinearLayout
             android:id="@+id/table"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="170dp"
             android:orientation="horizontal"
             android:visibility="invisible"
             tools:visibility="invisible">
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="152dp"
+                android:layout_height="160dp"
                 android:layerType="hardware"
                 android:orientation="horizontal">
 
@@ -122,6 +122,7 @@
                         app:fontFamily="monospace" />
                 </TableRow>
                 <TableRow>
+
                     <Button
                         android:id="@+id/addPrevButton"
                         android:layout_width="match_parent"

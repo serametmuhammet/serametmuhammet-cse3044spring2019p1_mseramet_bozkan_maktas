@@ -19,12 +19,6 @@
             android:onClick="action_random"
             android:text="@string/rastgele" />
 
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="250dp"
-            android:layout_height="100dp"
-            android:onClick="onFindClick"
-            android:text="@string/Favori" />
 
         <Button
             android:id="@+id/profile_screen"

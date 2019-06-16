@@ -30,6 +30,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -88,6 +89,7 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         getSupportActionBar().hide();
+        String test;
 
         int[] discounts = {10,20,30,40};
 
@@ -231,7 +233,7 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
                     googleMap.clear();
                     // This loop will go through all the results and add marker on each location.
                     Random generator = new Random();
-                    int i = generator.nextInt(response.body().getResults().size()) + 1;
+                    int i = generator.nextInt(response.body().getResults().size());
 
                     Double lat = response.body().getResults().get(i).getGeometry().getLocation().getLat();
                     Double lng = response.body().getResults().get(i).getGeometry().getLocation().getLng();
@@ -249,12 +251,13 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
                     // Title for Marker
                     markerOptions.title(placeName + " : " + vicinity);
                     // Color or drawable for marker
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                     // add marker
                     Marker m = googleMap.addMarker(markerOptions);
                     // move map camera
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 13);
+                    //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    googleMap.animateCamera(cameraUpdate);
 
                 } catch (Exception e) {
                     Log.d("onResponse", "There is an error");
