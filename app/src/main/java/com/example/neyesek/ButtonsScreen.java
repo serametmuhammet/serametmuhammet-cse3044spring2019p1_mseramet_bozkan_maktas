@@ -88,32 +88,6 @@ public class ButtonsScreen extends AppCompatActivity {
             }
         });
 
-        nearbyPlaces.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(ButtonsScreen.this, "POSTING...", Toast.LENGTH_LONG).show();
-                final String PostTitle = "Previous Restaurants";
-                final String PostDesc = "Burger Kiing";
-                // do a check for empty fields
-                if (!TextUtils.isEmpty(PostDesc) && !TextUtils.isEmpty(PostTitle)){
-
-                            final Restaurant prevRest = new Restaurant(PostDesc);
-
-                            //getting the post image download url
-                            Toast.makeText(getApplicationContext(), "Succesfully Uploaded", Toast.LENGTH_SHORT).show();
-                            final DatabaseReference newPost = databaseRef;
-                            //final DatabaseReference newPost = databaseRef.push();
-                            //adding post contents to database reference
-                            newPost.push().setValue("Mc Donalds");
-                            newPost.push().setValue("KFC");
-
-
-                }
-            }
-        });
-
-
-
 
     }
 

@@ -32,12 +32,7 @@
             android:layout_height="100dp"
             android:text="Profil"
             />
-        <Button
-            android:id="@+id/nearby_places"
-            android:layout_width="250dp"
-            android:layout_height="100dp"
-            android:text="NearBy Rest"
-            />
+
 
     </LinearLayout>
 
