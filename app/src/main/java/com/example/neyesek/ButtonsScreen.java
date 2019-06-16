@@ -50,7 +50,6 @@ public class ButtonsScreen extends AppCompatActivity {
         getSupportActionBar().hide();
 
         profile = (Button)findViewById(R.id.profile_screen);
-        nearbyPlaces = (Button)findViewById(R.id.nearby_places);
 
         profile.setOnClickListener(new View.OnClickListener() {
             @Override
