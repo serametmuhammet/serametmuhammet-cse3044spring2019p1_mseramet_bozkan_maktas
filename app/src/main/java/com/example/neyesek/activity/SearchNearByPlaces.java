@@ -37,6 +37,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.neyesek.MapScreen;
 import com.example.neyesek.R;
 import com.example.neyesek.model.NearByApiResponse;
+import com.google.android.gms.maps.CameraUpdate;
 
 
 import retrofit2.Call;
@@ -52,6 +53,7 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
     private Button btnFind;
     private TextView placeName1,timePlace;
     private LocationRequest mLocationRequest;
+    String test;
     public Location location;
     private int PROXIMITY_RADIUS = 300;
     SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
@@ -93,10 +95,8 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         this.googleMap = googleMap;
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 buildGoogleApiClient();
@@ -105,7 +105,7 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
             }
         } else {
             buildGoogleApiClient();
-            googleMap.setMyLocationEnabled(true);
+                googleMap.setMyLocationEnabled(true);
         }
     }
 
@@ -116,14 +116,13 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
     }
 
     public void onFindClick(View view){
-        findPlaces("restoran");
+        findPlaces("restaurant");
         View b = findViewById(R.id.table);
         b.setVisibility(View.VISIBLE);
-        View c = findViewById(R.id.btnFind);
+        /*View c = findViewById(R.id.btnFind);
         c.setEnabled(false);
-        c.setVisibility(View.INVISIBLE);
+        c.setVisibility(View.INVISIBLE);*/
     }
-
 
     public void findPlaces(String placeType){
         Call<NearByApiResponse> call = MapScreen.getApp().getApiService().getNearbyPlaces(placeType, location.getLatitude() + "," + location.getLongitude(), PROXIMITY_RADIUS);
@@ -135,7 +134,7 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
                     googleMap.clear();
                     // This loop will go through all the results and add marker on each location.
                     Random generator = new Random();
-                    int i = generator.nextInt(response.body().getResults().size()) + 1;
+                    int i = generator.nextInt(response.body().getResults().size());
 
                     Double lat = response.body().getResults().get(i).getGeometry().getLocation().getLat();
                     Double lng = response.body().getResults().get(i).getGeometry().getLocation().getLng();
@@ -144,6 +143,7 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
                     MarkerOptions markerOptions = new MarkerOptions();
                     LatLng latLng = new LatLng(lat, lng);
                     placeName1.setText(placeName);
+                    test = placeName;
                     c.setTime(date);
                     c.add(Calendar.MINUTE, 15);
                     Date newDate = c.getTime();
@@ -153,12 +153,13 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
                     // Title for Marker
                     markerOptions.title(placeName + " : " + vicinity);
                     // Color or drawable for marker
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                     // add marker
                     Marker m = googleMap.addMarker(markerOptions);
                     // move map camera
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                    googleMap.animateCamera(CameraUpdateFactory.zoomTo(13));
+                    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 13);
+                    //googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+                    googleMap.animateCamera(cameraUpdate);
 
                 } catch (Exception e) {
                     Log.d("onResponse", "There is an error");

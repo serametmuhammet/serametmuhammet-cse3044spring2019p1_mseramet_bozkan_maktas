@@ -48,6 +48,7 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.Co
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_screen);
+        getSupportActionBar().hide();
 
         email = (EditText) findViewById(R.id.et_email);
         password = (EditText) findViewById(R.id.et_password);
@@ -133,26 +134,6 @@ public class LoginScreen extends AppCompatActivity implements GoogleApiClient.Co
     // TODO(2) Connect this with the main page
     // Before connection make sure the user exist
     public void action_login(String userEmail, String userPassword) {
-        /*if (userEmail.equals("admin") && userPassword.equals("1234")) {
-            Context context = LoginScreen.this;
-            Class destination = ButtonsScreen.class;
-            Intent intent = new Intent(context, destination);
-            startActivity(intent);
-        }else {
-            if(userEmail == null || userPassword == null){
-                info.setVisibility(View.VISIBLE);
-                info.setText("Formu doldurunuz");
-            }else {
-                if(userEmail.equals("admin") == false){
-                    info.setVisibility(View.VISIBLE);
-                    info.setText("Kullanıcı bulunamadı");
-                    }
-                if(userEmail.equals("admin@neyesek.com") && userPassword.equals("1234") == false){
-                    info.setVisibility(View.VISIBLE);
-                    info.setText("Yanlış Şifre");
-                    }
-                }
-            }*/
         Context context = LoginScreen.this;
         Class destination = ButtonsScreen.class;
         Intent intent = new Intent(context, destination);
