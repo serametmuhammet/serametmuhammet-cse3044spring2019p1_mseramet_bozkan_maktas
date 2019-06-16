@@ -14,38 +14,34 @@
         android:background="#000000"
         android:orientation="vertical">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="75dp" />
-
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="250dp" />
+            android:layout_height="344dp" />
 
         <LinearLayout
             android:id="@+id/table"
             android:layout_width="match_parent"
-            android:layout_height="170dp"
+            android:layout_height="181dp"
             android:orientation="horizontal"
             android:visibility="invisible"
             tools:visibility="invisible">
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="160dp"
+                android:layout_height="177dp"
                 android:layerType="hardware"
                 android:orientation="horizontal">
 
                 <TableRow
-                    android:layout_width="match_parent"
+                    android:layout_width="347dp"
                     android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/textView"
-                        android:layout_width="149dp"
+                        android:layout_width="180dp"
                         android:layout_height="match_parent"
                         android:lineSpacingExtra="8sp"
                         android:text="@string/restoran"
@@ -56,7 +52,7 @@
 
                     <TextView
                         android:id="@+id/textView3"
-                        android:layout_width="201dp"
+                        android:layout_width="222dp"
                         android:layout_height="match_parent"
                         android:lineSpacingExtra="8sp"
                         android:textColor="#FFFFFF"
@@ -76,7 +72,7 @@
 
                     <TextView
                         android:id="@+id/textView6"
-                        android:layout_width="201dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:lineSpacingExtra="8sp"
                         android:text="@string/indirim"
@@ -102,7 +98,7 @@
 
                     <TextView
                         android:id="@+id/textView8"
-                        android:layout_width="201dp"
+                        android:layout_width="145dp"
                         android:layout_height="match_parent"
                         android:lineSpacingExtra="8sp"
                         android:text="@string/kalan_sure"
@@ -121,6 +117,7 @@
                         android:typeface="sans"
                         app:fontFamily="monospace" />
                 </TableRow>
+
                 <TableRow>
 
                     <Button
@@ -131,8 +128,8 @@
                         android:enabled="true"
                         android:text="Gittim"
                         android:visibility="visible"
-                        tools:visibility="visible"
-                        />
+                        tools:visibility="visible" />
+
                     <Button
                         android:id="@+id/addFavButton"
                         android:layout_width="match_parent"
@@ -141,10 +138,7 @@
                         android:enabled="true"
                         android:text="Favorilere Ekle"
                         android:visibility="visible"
-                        tools:visibility="visible"
-                        />
-
-
+                        tools:visibility="visible" />
 
 
                 </TableRow>
@@ -160,7 +154,7 @@
             android:layout_weight="0"
             android:enabled="true"
             android:onClick="onFindClick"
-            android:text="Nearby Restaurants"
+            android:text="Restoran Öner"
             android:visibility="visible"
             tools:visibility="visible" />
 
