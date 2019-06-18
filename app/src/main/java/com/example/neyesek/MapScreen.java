@@ -17,11 +17,6 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Parth Dave on 31/3/17.
- * Spaceo Technologies Pvt Ltd.
- * parthd.spaceo@gmail.com
- */
 
 public class MapScreen extends Application {
 
