@@ -1,6 +1,7 @@
 package com.example.neyesek;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,6 +18,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.StorageReference;
 
 public class RegisterScreen extends AppCompatActivity {
 
@@ -25,6 +29,14 @@ public class RegisterScreen extends AppCompatActivity {
     Button register;
     EditText email;
     EditText password;
+    private StorageReference storage;
+    private FirebaseDatabase database;
+    private DatabaseReference gittimRef;
+    private DatabaseReference favRef, levelRef;
+    private FirebaseAuth mAuth;
+    private Uri uri = null;
+    private DatabaseReference mDatabaseUsers;
+    private FirebaseUser mCurrentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +88,13 @@ public class RegisterScreen extends AppCompatActivity {
                                             .setDisplayName("" + fullname.getText().toString())
                                             .build();
 
-                                    startActivity(new Intent(RegisterScreen.this, LoginScreen.class));
+                                    mAuth = FirebaseAuth.getInstance();
+                                    mCurrentUser = mAuth.getCurrentUser();
+                                    mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Users").child(mCurrentUser.getUid());
+                                    gittimRef = database.getInstance().getReference().child("NeYesek").child(mCurrentUser.getUid()).child("Fullname");
+                                    gittimRef.setValue(fullname.getText().toString());
+                                    Toast.makeText(RegisterScreen.this,"KAYIT BAŞARILI. HOŞGELDİNİZ",Toast.LENGTH_LONG).show();
+                                    startActivity(new Intent(RegisterScreen.this, ButtonsScreen.class));
                                     finish();
                                 }
 
