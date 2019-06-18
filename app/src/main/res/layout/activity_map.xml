@@ -29,6 +29,12 @@
             android:visibility="invisible"
             tools:visibility="invisible">
 
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="177dp"
@@ -143,6 +149,7 @@
 
                 </TableRow>
             </TableLayout>
+            </ScrollView>
 
 
         </LinearLayout>

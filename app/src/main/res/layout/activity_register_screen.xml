@@ -21,14 +21,6 @@
             android:hint="@string/user_name"
             android:layout_margin="10dp"/>
 
-        <!--username that user will use in app-->
-        <EditText
-            android:id="@+id/et_reg_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:layout_margin="10dp"
-            android:hint="@string/username"/>
 
         <!--email address-->
         <EditText
@@ -46,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
+            android:inputType="textPassword"
             android:layout_margin="10dp"
             android:hint="@string/password"/>
 

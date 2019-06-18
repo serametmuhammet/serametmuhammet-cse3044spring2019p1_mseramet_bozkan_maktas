@@ -161,8 +161,35 @@ public class SearchNearByPlaces extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View v) {
 
-                final DatabaseReference newPost = favRef;
-                newPost.push().setValue(placeName1.getText().toString());
+                favRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        int check=0;
+                        for(DataSnapshot data: dataSnapshot.getChildren()){
+                            System.out.println(">>>" + data);
+                            if (data.getValue().equals(placeName1.getText().toString())) {
+                                System.out.println(">>>>>>>>>>BU VARRRR");
+                                Toast.makeText(SearchNearByPlaces.this, "Bu Restoranı Zaten Ekledin!", Toast.LENGTH_LONG).show();
+                                check=1;
+                            }
+                        }
+                        if (check==0){
+
+                            favRef.push().setValue(placeName1.getText().toString());
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+//
+//                final DatabaseReference newPost = favRef;
+//                newPost.push().setValue(placeName1.getText().toString());
 
             }
         });

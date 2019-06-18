@@ -33,9 +33,11 @@ public class UserPage extends AppCompatActivity {
     public TextView fav_rest;
     public TextView prev_rest;
     public TextView level;
+    public TextView fullname;
     private DatabaseReference prevRef;
     private DatabaseReference favRef;
     private DatabaseReference levelRef;
+    private DatabaseReference fullnameRef;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mCurrentUser;
@@ -50,6 +52,7 @@ public class UserPage extends AppCompatActivity {
         prev_rest = (TextView)findViewById(R.id.prev_rest);
         fav_rest = (TextView)findViewById(R.id.fav_rest);
         level = (TextView)findViewById(R.id.level);
+        fullname = (TextView)findViewById(R.id.fullname);
 
         String restNames[] = getRestaurants();
 
@@ -66,6 +69,7 @@ public class UserPage extends AppCompatActivity {
         };
 
         mCurrentUser = mAuth.getCurrentUser();
+        fullnameRef = FirebaseDatabase.getInstance().getReference().child("NeYesek").child(mCurrentUser.getUid()).child("Fullname");
         prevRef = FirebaseDatabase.getInstance().getReference().child("NeYesek").child(mCurrentUser.getUid()).child("Previous Rest");
         favRef = FirebaseDatabase.getInstance().getReference().child("NeYesek").child(mCurrentUser.getUid()).child("Favorite Rest");
         levelRef = FirebaseDatabase.getInstance().getReference().child("NeYesek").child(mCurrentUser.getUid()).child("Level");
@@ -82,6 +86,19 @@ public class UserPage extends AppCompatActivity {
 
                     String levelText = dataSnapshot.getValue().toString();
                     level.setText(levelText);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            fullnameRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String fullnamee = dataSnapshot.getValue().toString();
+                    fullname.setText(fullnamee);
                 }
 
                 @Override
