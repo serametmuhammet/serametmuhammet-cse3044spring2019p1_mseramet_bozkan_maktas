@@ -1,0 +1,4 @@
+#Sat Jun 15 12:44:14 EET 2019
+base.0=C\:\\Users\\Beytullah\\Desktop\\serametmuhammet-cse3044spring2019p1_mseramet_bozkan_maktas\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\10
+path.0=classes.dex
+renamed.0=classes.dex
