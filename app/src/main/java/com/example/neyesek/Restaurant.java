@@ -1,6 +1,6 @@
 package com.example.neyesek;
 
-public class Restaurant {
+public class    Restaurant {
 
     private String name;
 
